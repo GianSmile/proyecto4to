@@ -1,10 +1,8 @@
 # Hola mundo, soy yo, el backend dev de este proyecto, BLUR
 
-## Lunes 31/07/2023
-Se efectuó el cambio de roles con Gian y ahora soy oficialmente el BackEnd Developer.
-
 ## Martes 01/08/2023
-Creación del Diagrama Entidad-Relación.
+- Se efectuó el cambio de roles con Gian y ahora soy oficialmente el BackEnd Developer.
+- Creación del Diagrama Entidad-Relación.
 
 ## Miercoles 02/08/2023
 - Ajustes al Diagrama Entidad-Relación.
