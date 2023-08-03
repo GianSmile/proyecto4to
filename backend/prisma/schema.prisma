@@ -21,6 +21,7 @@ model User {
   vet_fullname String? @db.VarChar(80) @unique
   vet_degree String? @db.VarChar(80)
   vet_analysis Analysis[]
+  pets Pet[] @relation("PetOwners")
 }
 
 model Analysis {
@@ -30,12 +31,12 @@ model Analysis {
   date DateTime @default(now())
   vet_verified Boolean?
   vet_comment String?
-  mascot_id Int
-  mascot Mascot @relation(fields: [mascot_id], references: [ID])
+  pet_id Int @map("mascot_id")
+  pet Pet @relation(fields: [pet_id], references: [ID])
   vet_id Int?
   vet User? @relation(fields: [vet_id], references: [ID])
 
-  @@index([mascot_id])
+  @@index([pet_id])
   @@index([vet_id])
 }
 
@@ -43,12 +44,13 @@ enum Results {
   NOTHING
 }
 
-model Mascot {
+model Pet {
   ID Int @id @unique @default(autoincrement())
   name String @db.VarChar(64)
   animal Animal
   breed String @db.VarChar(64)
   analysis Analysis[]
+  owners User[] @relation("PetOwners")
 }
 
 enum Animal {
