@@ -11,3 +11,8 @@
 - Creé la base de datos en PlanetScale.
 - Hablé con Luis Embon que me dió recomendaciones sobre que tecnologías investigar para no usar PHP.
 - Conseguí acceso al repo y comencé a documentar.
+
+## Jueves 03/08/2023
+- Descartación del uso de las tecnologías PostgreSQL y deno.
+- Seteado de proyecto de node, express, typescript y prisma.
+- Creación de modelos de prisma y migración a la base de datos.
