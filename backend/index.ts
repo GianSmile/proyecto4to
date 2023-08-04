@@ -1,6 +1,9 @@
 import { Request, Response } from "express";
 
-const express = require("express");
+import express from "express";
+
+import { PrismaClient } from '@prisma/client'; 
+const prisma = new  PrismaClient();
 
 const app = express();
 
