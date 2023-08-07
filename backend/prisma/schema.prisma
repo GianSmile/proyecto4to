@@ -17,8 +17,8 @@ model User {
   password String @db.Char(64)
   email String @db.VarChar(254) @unique
   phone String? @db.VarChar(258) @unique
+  fullname String? @db.VarChar(80)
   is_vet Boolean @default(false)
-  vet_fullname String? @db.VarChar(80) @unique
   vet_degree String? @db.VarChar(80)
   vet_analysis Analysis[]
   pets Pet[] @relation("PetOwners")
@@ -31,7 +31,7 @@ model Analysis {
   date DateTime @default(now())
   vet_verified Boolean?
   vet_comment String?
-  pet_id Int @map("mascot_id")
+  pet_id Int
   pet Pet @relation(fields: [pet_id], references: [ID])
   vet_id Int?
   vet User? @relation(fields: [vet_id], references: [ID])
