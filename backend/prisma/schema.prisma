@@ -6,37 +6,37 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
   relationMode = "prisma"
 }
 
 model User {
-  ID Int @id @unique @default(autoincrement())
-  username String @db.VarChar(32) @unique
-  password String @db.Char(64)
-  email String @db.VarChar(254) @unique
-  phone String? @db.VarChar(258) @unique
-  fullname String? @db.VarChar(80)
-  is_vet Boolean @default(false)
-  vet_dni Int? @unique
-  vet_reg_id Int? @unique
-  vet_degree String? @db.VarChar(80)
+  ID           Int        @id @unique @default(autoincrement())
+  username     String     @unique @db.VarChar(32)
+  password     String     @db.Char(64)
+  email        String     @unique @db.VarChar(254)
+  phone        String?    @unique @db.VarChar(258)
+  fullname     String?    @db.VarChar(80)
+  is_vet       Boolean    @default(false)
+  vet_dni      Int?       @unique
+  vet_reg_id   Int?       @unique
+  vet_degree   String?    @db.VarChar(80)
   vet_analysis Analysis[]
-  pets Pet[] @relation("PetOwners")
+  pets         Pet[]      @relation("PetOwners")
 }
 
 model Analysis {
-  ID Int @id @unique @default(autoincrement())
-  image_url String
-  result Results?
-  date DateTime @default(now())
+  ID           Int      @id @unique @default(autoincrement())
+  image_url    String
+  result       Results?
+  date         DateTime @default(now())
   vet_verified Boolean?
-  vet_comment String?
-  pet_id Int
-  pet Pet @relation(fields: [pet_id], references: [ID])
-  vet_id Int?
-  vet User? @relation(fields: [vet_id], references: [ID])
+  vet_comment  String?
+  pet_id       Int
+  pet          Pet      @relation(fields: [pet_id], references: [ID])
+  vet_id       Int?
+  vet          User?    @relation(fields: [vet_id], references: [ID])
 
   @@index([pet_id])
   @@index([vet_id])
@@ -47,12 +47,12 @@ enum Results {
 }
 
 model Pet {
-  ID Int @id @unique @default(autoincrement())
-  name String @db.VarChar(64)
-  animal Animal
-  breed String @db.VarChar(64)
+  ID       Int        @id @unique @default(autoincrement())
+  name     String     @db.VarChar(64)
+  animal   Animal
+  breed    String     @db.VarChar(64)
   analysis Analysis[]
-  owners User[] @relation("PetOwners")
+  owners   User[]     @relation("PetOwners")
 }
 
 enum Animal {
