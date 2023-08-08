@@ -19,6 +19,8 @@ model User {
   phone String? @db.VarChar(258) @unique
   fullname String? @db.VarChar(80)
   is_vet Boolean @default(false)
+  vet_dni Int? @unique
+  vet_reg_id Int? @unique
   vet_degree String? @db.VarChar(80)
   vet_analysis Analysis[]
   pets Pet[] @relation("PetOwners")
