@@ -17,12 +17,12 @@ model User {
   password     String     @db.Char(64)
   email        String     @unique @db.VarChar(254)
   phone        String?    @unique @db.VarChar(258)
-  fullname     String?    @db.VarChar(80)
+  fullname     String     @db.VarChar(80)
   is_vet       Boolean    @default(false)
   vet_dni      Int?       @unique
   vet_reg_id   Int?       @unique
   vet_degree   String?    @db.VarChar(80)
-  vet_analysis Analysis[]
+  vet_analyses Analysis[]
   pets         Pet[]      @relation("PetOwners")
 }
 
@@ -51,7 +51,7 @@ model Pet {
   name     String     @db.VarChar(64)
   animal   Animal
   breed    String     @db.VarChar(64)
-  analysis Analysis[]
+  analyses Analysis[]
   owners   User[]     @relation("PetOwners")
 }
 
