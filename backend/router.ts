@@ -10,4 +10,4 @@ router.get("/pet/:petId", controllers.getPet);
 router.get("/pet/:petId/analyses", controllers.getPetAnalyses);
 router.get("/analysis/:analysisId", controllers.getAnalysis);
 
-module.exports = router;
+export default router;

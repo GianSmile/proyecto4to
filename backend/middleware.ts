@@ -12,7 +12,7 @@ export function authMiddleware(req: Request, res: Response, next: any)
 
     if (!authorization)
     {
-        res.status(401).send("Unauthorized");
+        res.sendStatus(401);
         return;
     }
 
@@ -20,7 +20,7 @@ export function authMiddleware(req: Request, res: Response, next: any)
 
     if (!token)
     {
-        res.status(401).send("Unauthorized");
+        res.sendStatus(401);
         return;
     }
 
