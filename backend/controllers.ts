@@ -186,13 +186,14 @@ export async function postRegister(req: Request, res: Response)
         return;
     }
 
-    //res.status(200).json(user); // o un token para auth?
+    createAndSetToken(user, res);
+    res.sendStatus(200);
 }
 
 export async function postLogin(req: Request, res: Response)
 {
     const { identifier, password } = req.body;
-    var condition;
+    let condition;
 
     if (!identifier || !password || password !instanceof String)
     {
@@ -212,14 +213,7 @@ export async function postLogin(req: Request, res: Response)
     }
 
     const user = await prisma.user.findUnique({
-        where: condition,
-        select: {
-            ID: true,
-            username: true,
-            password: true,
-            email: true,
-            is_vet: true
-        }
+        where: condition
     }).catch((err: Prisma.PrismaClientKnownRequestError) => {
         res.status(400).send(err.message)
     });
@@ -230,5 +224,12 @@ export async function postLogin(req: Request, res: Response)
         return;
     }
 
-    res.status(200).json(user);
+    createAndSetToken(user, res);
+    res.sendStatus(200);
+}
+
+function createAndSetToken(user: User, res: Response)
+{
+    const token: String = "TODO";
+    res.header("Set-Cookie", "token=" + token);
 }
