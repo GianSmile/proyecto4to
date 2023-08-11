@@ -9,9 +9,9 @@ const emailRegex = /(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"
 
 export async function getUser(req: Request, res: Response)
 {
-    const { userName } = req.params;
+    const { username } = req.params;
     const user = await prisma.user.findUnique({
-        where: { username: userName },
+        where: { username },
         select: {
             ID: true,
             username: true,
@@ -38,9 +38,9 @@ export async function getUser(req: Request, res: Response)
 
 export async function getUserPets(req: Request, res: Response)
 {
-    const { userName } = req.params;
+    const { username } = req.params;
     const user = await prisma.user.findUnique({
-        where: { username: userName },
+        where: { username },
         include: { pets: true }
     }).catch((err: Prisma.PrismaClientKnownRequestError) => {
         res.status(400).send(err.message)
@@ -96,10 +96,10 @@ export async function getPetAnalyses(req: Request, res: Response)
 
 export async function getUserAnalyses(req: Request, res: Response)
 {
-    const { userName } = req.params;
+    const { username } = req.params;
 
     const user = await prisma.user.findUnique({
-        where: { username: userName },
+        where: { username },
         include: { 
             pets: {
                 include: { analyses: true }
@@ -148,7 +148,7 @@ export async function postRegister(req: Request, res: Response)
 
     if (username && !userRegex.test(username))
     {
-        res.status(400).send("Username can only contain lowercase letters, numbers, underscores and dots. It must not have 2 continuous dots or underscores, or end with a dot.");
+        res.status(400).send("username can only contain lowercase letters, numbers, underscores and dots. It must not have 2 continuous dots or underscores, or end with a dot.");
         return;
     }
 
@@ -166,15 +166,15 @@ export async function postRegister(req: Request, res: Response)
 
     const user = await prisma.user.create({
         data: {
-            username: username,
-            password: password,
-            email: email,
-            phone: phone,
-            fullname: fullname,
-            is_vet: is_vet,
-            vet_dni: vet_dni,
-            vet_reg_id: vet_reg_id,
-            vet_degree: vet_degree,
+            username,
+            password,
+            email,
+            phone,
+            fullname,
+            is_vet,
+            vet_dni,
+            vet_reg_id,
+            vet_degree,
         }
     }).catch((err: Prisma.PrismaClientKnownRequestError) => {
         res.status(400).send(err.message)
@@ -203,9 +203,9 @@ export async function postLogin(req: Request, res: Response)
 
 
     if (emailRegex.test(identifier))
-        condition = { email: identifier, password: password };
+        condition = { email: identifier, password };
     else if (userRegex.test(identifier))
-        condition = { username: identifier, password: password };
+        condition = { username: identifier, password };
     else
     {
         res.status(400).send("Invalid identifier");
@@ -231,5 +231,6 @@ export async function postLogin(req: Request, res: Response)
 function createAndSetToken(user: User, res: Response)
 {
     const token: String = "TODO";
-    res.header("Set-Cookie", "token=" + token);
+    res.cookie("token", token, {httpOnly: true, maxAge: 15778476000});
+    res.cookie("is_vet", user.is_vet);
 }
