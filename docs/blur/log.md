@@ -37,6 +37,7 @@
   - `index.ts`: Archivo principal, instancia de express, use y abrir puerto para escuchar requests.
   - `router.ts`: Declarar rutas de endpoints y asignarles una función de control.
   - `controller.ts`: Declarar funciones de control de requests.
+  - `middleware.ts`: Declarar funciones de filtrado de middleware.
 - Verificar que los caracteres de usuarios y emails sean correctos usando RegExp.
 
 ## Jueves 10/08/2023
