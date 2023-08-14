@@ -16,3 +16,33 @@
 - Descartación del uso de las tecnologías PostgreSQL y deno.
 - Seteado de proyecto de node, express, typescript y prisma.
 - Creación de modelos de prisma y migración a la base de datos.
+
+## Lunes 07/08/2023
+- Empezar a crear API con Express. Obtener usuario.
+- Cambiar el esquema de la base de datos para añadir DNI y numero de matricula para los veterinarios.
+
+## Martes 08/08/2023
+- Crear endpoints GET para:
+  - Mascotas por usuario.
+  - Mascota por id.
+  - Análisis por mascota.
+  - Análisis por usuario.
+  - Análisis por id.
+- Comenzar a crear endpoints POST para:
+  - Crear usuario.
+  - Crear mascota.
+
+## Miercoles 09/08/2023
+- Dividir las partes del backend en diferentes archivos en vez de usar unicamente `index.ts` para mejor organización:
+  - `index.ts`: Archivo principal, instancia de express, use y abrir puerto para escuchar requests.
+  - `router.ts`: Declarar rutas de endpoints y asignarles una función de control.
+  - `controller.ts`: Declarar funciones de control de requests.
+- Verificar que los caracteres de usuarios y emails sean correctos usando RegExp.
+
+## Jueves 10/08/2023
+- Comenzar a investigar sobre el uso de tokens con JWT, cookies, y la librería jose.
+
+## Lunes 14/08/2023
+- Recorrido de Universidad Maimonides.
+- Recorrido de veterinaria modelo WellVet.
+- Reformulación del proyecto.
